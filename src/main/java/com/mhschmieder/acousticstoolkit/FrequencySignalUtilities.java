@@ -32,6 +32,8 @@ package com.mhschmieder.acousticstoolkit;
 
 import java.text.NumberFormat;
 
+import org.apache.commons.math3.util.MathUtils;
+
 import com.mhschmieder.commonstoolkit.text.NumberFormatUtilities;
 import com.mhschmieder.mathtoolkit.Complex;
 import com.mhschmieder.mathtoolkit.MathConstants;
@@ -60,7 +62,7 @@ public final class FrequencySignalUtilities {
     // Convert magnitude (the square root of the sum of the squares of the real
     // and imaginary parts of a complex value) from linear to decibels.
     public static double convertComplexValueToDecibels( final Complex complexValue ) {
-        return convertMagnitudeToDecibels( Complex.abs( complexValue ) );
+        return convertMagnitudeToDecibels( complexValue.abs() );
     }
 
     // Convert magnitude (the square root of the sum of the squares of the real
@@ -108,6 +110,7 @@ public final class FrequencySignalUtilities {
     }
 
     // Normalize a frequency phase vector to [-180, +180] range.
+    // TODO: Determine whether this is any different from unwrapPhase().
     public static void normalizePhase( final double[] frequencyPhaseData, final int numberOfBins ) {
         // NOTE: We stop one shy of the last index due to comparisons.
         final int binFirstIndex = 0;
@@ -135,17 +138,7 @@ public final class FrequencySignalUtilities {
 
     // Unwrap a single frequency phase value to [-180, +180] range.
     public static double unwrapPhase( final double frequencyPhase ) {
-        double unwrappedFrequencyPhase = frequencyPhase;
-
-        while ( unwrappedFrequencyPhase < -180.0d ) {
-            unwrappedFrequencyPhase += 360.0d;
-        }
-
-        while ( unwrappedFrequencyPhase > 180.0d ) {
-            unwrappedFrequencyPhase -= 360.0d;
-        }
-
-        return unwrappedFrequencyPhase;
+        return MathUtils.normalizeAngle( frequencyPhase, 0.0d );
     }
 
     // Unwrap a frequency phase vector to [-180 180] range.

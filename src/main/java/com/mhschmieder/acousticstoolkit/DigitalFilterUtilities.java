@@ -76,7 +76,7 @@ public class DigitalFilterUtilities {
         final double onePlusCos = 1.0d + eQCos;
 
         // Calculate the frequency response for the given breakpoint.
-        Complex result = Complex.UNITY;
+        Complex result = Complex.ONE;
         for ( int i = 0; i < biquadSectionCount; i++ ) {
             // Get a set of digital domain biquad coefficients.
             final double[][] digitalBiquadCoefficients =
@@ -86,7 +86,7 @@ public class DigitalFilterUtilities {
                                                                                      analogCoefficients[ i ] );
 
             // Get the digital biquad filter for this section.
-            result = result.mul( getDigitalBiquadFilter( z, zSquared, digitalBiquadCoefficients ) );
+            result = result.multiply( getDigitalBiquadFilter( z, zSquared, digitalBiquadCoefficients ) );
         }
 
         return result;
@@ -161,11 +161,11 @@ public class DigitalFilterUtilities {
 
         // NOTE: Avoid divide by zero exceptions!
         if ( Complex.ZERO.equals( denominator ) ) {
-            return Complex.UNITY;
+            return Complex.ONE;
         }
 
         // Result = numerator / denominator
-        final Complex result = numerator.div( denominator );
+        final Complex result = numerator.divide( denominator );
 
         return result;
     }
@@ -235,8 +235,8 @@ public class DigitalFilterUtilities {
         final double a1 = digitalQuadCoefficients[ 1 ];
         final double a2 = digitalQuadCoefficients[ 2 ];
 
-        final Complex result = Complex.complex( a0 ).div( zSquared )
-                .add( Complex.complex( a1 ).div( z ) ).add( Complex.complex( a2 ) );
+        final Complex result = new Complex( a0 ).divide( zSquared )
+                .add( new Complex( a1 ).divide( z ) ).add( new Complex( a2 ) );
 
         return result;
     }

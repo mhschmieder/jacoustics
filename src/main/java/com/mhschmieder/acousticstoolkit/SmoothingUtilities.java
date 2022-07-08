@@ -31,7 +31,7 @@
 package com.mhschmieder.acousticstoolkit;
 
 import com.mhschmieder.mathtoolkit.MathConstants;
-import com.mhschmieder.mathtoolkit.MathExt;
+import com.mhschmieder.mathtoolkit.MathUtilities;
 
 public final class SmoothingUtilities extends Object {
 
@@ -101,7 +101,7 @@ public final class SmoothingUtilities extends Object {
         // TODO: Review these variable names relative to usage.
         final double windowCenter = StrictMath.exp( MathConstants.LN2 / ( octaveDivider * 2.0d ) );
         final double lnWindowCenter = StrictMath.log( windowCenter );
-        final double windowWidth = -MathExt.sqr( lnWindowCenter ) / StrictMath.log( voltageRatio );
+        final double windowWidth = -MathUtilities.sqr( lnWindowCenter ) / StrictMath.log( voltageRatio );
 
         // NOTE: The window's left and right edge bin indices might be
         // incorrectly named and may even be related to the smoothing table's
@@ -127,7 +127,7 @@ public final class SmoothingUtilities extends Object {
 
                 final double lnF = lnWindowBin - lnReferenceBin;
 
-                final double e = -MathExt.sqr( lnF );
+                final double e = -MathUtilities.sqr( lnF );
 
                 final double y = StrictMath.exp( e / windowWidth );
 
