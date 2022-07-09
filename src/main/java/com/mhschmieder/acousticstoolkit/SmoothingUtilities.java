@@ -30,6 +30,8 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
+import org.apache.commons.math3.util.FastMath;
+
 import com.mhschmieder.mathtoolkit.MathConstants;
 import com.mhschmieder.mathtoolkit.MathUtilities;
 
@@ -99,10 +101,10 @@ public final class SmoothingUtilities extends Object {
         final double voltageRatio = FrequencySignalUtilities.getVoltageRatio( powerRatioDb );
 
         // TODO: Review these variable names relative to usage.
-        final double windowCenter = StrictMath.exp( MathConstants.LN2 / ( octaveDivider * 2.0d ) );
-        final double lnWindowCenter = StrictMath.log( windowCenter );
+        final double windowCenter = FastMath.exp( MathConstants.LN2 / ( octaveDivider * 2.0d ) );
+        final double lnWindowCenter = FastMath.log( windowCenter );
         final double windowWidth = -MathUtilities.sqr( lnWindowCenter )
-                / StrictMath.log( voltageRatio );
+                / FastMath.log( voltageRatio );
 
         // NOTE: The window's left and right edge bin indices might be
         // incorrectly named and may even be related to the smoothing table's
@@ -118,19 +120,19 @@ public final class SmoothingUtilities extends Object {
             final int windowRightEdgeBinIndex = binIndex + 15;
 
             final double referenceBin = frequencyBins[ binIndex ];
-            final double lnReferenceBin = StrictMath.log( referenceBin );
+            final double lnReferenceBin = FastMath.log( referenceBin );
 
             int smoothingIndex = 0;
             while ( ( windowLeftEdgeBinIndex < numberOfBins )
                     && ( windowLeftEdgeBinIndex < windowRightEdgeBinIndex ) ) {
                 final double windowBin = frequencyBins[ windowLeftEdgeBinIndex ];
-                final double lnWindowBin = StrictMath.log( windowBin );
+                final double lnWindowBin = FastMath.log( windowBin );
 
                 final double lnF = lnWindowBin - lnReferenceBin;
 
                 final double e = -MathUtilities.sqr( lnF );
 
-                final double y = StrictMath.exp( e / windowWidth );
+                final double y = FastMath.exp( e / windowWidth );
 
                 smoothingTable[ binIndex ][ smoothingIndex ] = y;
 

@@ -33,6 +33,7 @@ package com.mhschmieder.acousticstoolkit;
 import java.text.NumberFormat;
 
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.util.FastMath;
 import org.apache.commons.math3.util.MathUtils;
 
 import com.mhschmieder.commonstoolkit.text.NumberFormatUtilities;
@@ -68,17 +69,17 @@ public final class FrequencySignalUtilities {
     // Convert magnitude (the square root of the sum of the squares of the real
     // and imaginary parts of a complex value) from linear to decibels.
     public static double convertMagnitudeToDecibels( final double magnitude ) {
-        return 20.0d * StrictMath.log10( magnitude );
+        return 20.0d * FastMath.log10( magnitude );
     }
 
     // Convert the power ratio from linear to decibels.
     public static double convertPowerRatioToDecibels( final double powerRatio ) {
-        return 10.0d * StrictMath.log10( powerRatio );
+        return 10.0d * FastMath.log10( powerRatio );
     }
 
     // Get the power ratio (decibels) from the voltage ratio (linear).
     public static double getPowerRatioDb( final double voltageRatio ) {
-        return 20.0d * StrictMath.log10( voltageRatio );
+        return 20.0d * FastMath.log10( voltageRatio );
     }
 
     // Get the voltage ratio (linear) from the power ratio (decibels).
@@ -87,7 +88,7 @@ public final class FrequencySignalUtilities {
     //
     // https://webaudio.github.io/Audio-EQ-Cookbook/Audio-EQ-Cookbook.txt
     public static double getVoltageRatio( final double powerRatioDb ) {
-        return StrictMath.pow( 10.0d, powerRatioDb / 20.0d );
+        return FastMath.pow( 10.0d, powerRatioDb / 20.0d );
     }
 
     // Get the peaking voltage ratio (linear) from the power ratio (decibels).
@@ -96,17 +97,17 @@ public final class FrequencySignalUtilities {
     //
     // https://webaudio.github.io/Audio-EQ-Cookbook/Audio-EQ-Cookbook.txt
     public static double getPeakingVoltageRatio( final double powerRatioDb ) {
-        return StrictMath.pow( 10.0d, powerRatioDb / 40.0d );
+        return FastMath.pow( 10.0d, powerRatioDb / 40.0d );
     }
 
     // Convert the magnitude from decibels to linear.
     public static double convertMagnitudeFromDecibels( final double magnitude ) {
-        return StrictMath.pow( 10.0d, magnitude / 20.0d );
+        return FastMath.pow( 10.0d, magnitude / 20.0d );
     }
 
     // Convert the power ratio from decibels to linear.
     public static double convertPowerRatioFromDecibels( final double powerRatioDb ) {
-        return StrictMath.pow( 10.0d, powerRatioDb / 10.0d );
+        return FastMath.pow( 10.0d, powerRatioDb / 10.0d );
     }
 
     // Normalize a frequency phase vector to [-180, +180] range.
@@ -228,7 +229,7 @@ public final class FrequencySignalUtilities {
         final int bandNumberAt1kHz = ( int ) Math.round( octaveDividerRatio * 30.0d );
         final int numberOfFractionalOctaveBandsFrom1kHz = bandNumber - bandNumberAt1kHz;
         final double centerFrequency = 1000.0d
-                * StrictMath.pow( 2.0d, numberOfFractionalOctaveBandsFrom1kHz / octaveDivider );
+                * FastMath.pow( 2.0d, numberOfFractionalOctaveBandsFrom1kHz / octaveDivider );
         return centerFrequency;
     }
 
