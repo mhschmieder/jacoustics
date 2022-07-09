@@ -101,7 +101,8 @@ public final class SmoothingUtilities extends Object {
         // TODO: Review these variable names relative to usage.
         final double windowCenter = StrictMath.exp( MathConstants.LN2 / ( octaveDivider * 2.0d ) );
         final double lnWindowCenter = StrictMath.log( windowCenter );
-        final double windowWidth = -MathUtilities.sqr( lnWindowCenter ) / StrictMath.log( voltageRatio );
+        final double windowWidth = -MathUtilities.sqr( lnWindowCenter )
+                / StrictMath.log( voltageRatio );
 
         // NOTE: The window's left and right edge bin indices might be
         // incorrectly named and may even be related to the smoothing table's

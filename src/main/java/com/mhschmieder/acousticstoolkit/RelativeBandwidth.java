@@ -35,16 +35,16 @@ package com.mhschmieder.acousticstoolkit;
  * particular acoustic engineering contexts where one is often more focused on
  * the practicalities of which center frequencies can be easily measured for
  * their response. The official definition dictionary definition is as follows:
- * 
+ *
  * For an electric filter, the ratio of the bandwidth being considered to a
  * specified reference bandwidth, such as the bandwidth between frequencies at
  * which there is an attenuation of 3 decibels.
- * 
+ *
  * This specific enumeration is meant to represent typical acoustical
  * measurement and detection environments, most commonly with a focus on what
  * are useful frequencies for evaluation and analysis, such as for music but
  * also for audio signals related to marine mammals, environment, sonar, etc.
- * 
+ *
  * TODO: Expand this to also cover Relative Bandwidths that are multiple
  * octaves? No need to expand in the other direction, as 1/48 octave is in
  * most cases a single frequency (depending on the octave range context).
@@ -60,7 +60,7 @@ public enum RelativeBandwidth {
      * Returns the octave divider corresponding to the Relative Bandwidth,
      * which is always an integer and can be used as the denominator in various
      * acoustical calculations.
-     * 
+     *
      * @param relativeBandwidth
      *            The Relative bandwidth to convert to an Octave Divider
      * @return The integer value corresponding to the division factor to apply
@@ -89,7 +89,7 @@ public enum RelativeBandwidth {
     /**
      * Returns the Relative Bandwidth corresponding to a provided presentation
      * value (string).
-     * 
+     *
      * @param relativeBandwidthPresentationString
      *            The Relative Bandwidth presentation value to convert
      * @return The Relative bandwidth corresponding to a provided presentation
@@ -118,7 +118,7 @@ public enum RelativeBandwidth {
     /**
      * Returns a presentation value (string) for the Relative Bandwidth, whether
      * for saving in a file or presenting on the screen in a GUI context.
-     * 
+     *
      * @param relativeBandwidth
      *            The Relative Bandwidth to convert to a presentation value
      * @return A presentation value (string) for the provided Relative Bandwidth
@@ -131,7 +131,7 @@ public enum RelativeBandwidth {
     /**
      * Returns the Relative Bandwidth corresponding to a provided abbreviated
      * value (string).
-     * 
+     *
      * @param relativeBandwidthAbbreviatedString
      *            The Relative Bandwidth presentation value to convert
      * @return The Relative bandwidth corresponding to a provided abbreviated
@@ -145,7 +145,7 @@ public enum RelativeBandwidth {
     /**
      * Returns an abbreviated value (string) for the Relative Bandwidth, whether
      * for saving in a file or presenting on the screen in a GUI context.
-     * 
+     *
      * @param relativeBandwidth
      *            The Relative Bandwidth to convert to an abbreviated value
      * @return An abbreviated value (string) for the provided Relative Bandwidth
@@ -174,7 +174,7 @@ public enum RelativeBandwidth {
      * Returns the octave divider corresponding to the Relative Bandwidth,
      * which is always an integer and can be used as the denominator in various
      * acoustical calculations.
-     * 
+     *
      * @return The integer value corresponding to the division factor to apply
      *         relative to a full octave, for this Relative Bandwidth value
      */
@@ -185,7 +185,7 @@ public enum RelativeBandwidth {
     /**
      * Returns a presentation value (string) for the Relative Bandwidth, whether
      * for saving in a file or presenting on the screen in a GUI context.
-     * 
+     *
      * @return A presentation value (string) for this Relative Bandwidth
      */
     public final String toPresentationString() {
@@ -195,7 +195,7 @@ public enum RelativeBandwidth {
     /**
      * Returns an abbreviated value (string) for the Relative Bandwidth, whether
      * for saving in a file or presenting on the screen in a GUI context.
-     * 
+     *
      * @return An abbreviated value (string) for this Relative Bandwidth
      */
     public final String toAbbreviatedString() {

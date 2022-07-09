@@ -36,11 +36,11 @@ import com.mhschmieder.mathtoolkit.MathConstants;
  * This is an enumeration of possible resolution values for an SPL Palette. It
  * is done as an enumeration as some values are absolute and others are relative
  * to the overall SPL Dynamic Range.
- * 
+ *
  * Note that there are two categories of values, where the first two are
  * strictly based on the number of unique color hues shown, and are based on
  * built-in limitations of standard color processing for basic image file types.
- * 
+ *
  * The second set of values are more in the acoustics domain and are commonly
  * used in visualization contexts to help users see where values pass a
  * threshold. This is especially useful for showing where sound levels double.

@@ -35,7 +35,7 @@ package com.mhschmieder.acousticstoolkit;
  * by most people, and concise enough to display as axis tick labels in data
  * charts), for the coarsest Relative bandwidth values (i.e. one octave, and one
  * third octave).
- * 
+ *
  * TODO: Provide center frequencies for the lowest octaves that are below human
  * hearing ranges and also outside the realm of most audio special effects in
  * movies, as they may be scientifically pertinent for marine mammal studies and

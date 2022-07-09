@@ -30,7 +30,8 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
-import com.mhschmieder.mathtoolkit.Complex;
+import org.apache.commons.math3.complex.Complex;
+
 import com.mhschmieder.mathtoolkit.MathConstants;
 
 /**
@@ -86,7 +87,8 @@ public class DigitalFilterUtilities {
                                                                                      analogCoefficients[ i ] );
 
             // Get the digital biquad filter for this section.
-            result = result.multiply( getDigitalBiquadFilter( z, zSquared, digitalBiquadCoefficients ) );
+            result = result
+                    .multiply( getDigitalBiquadFilter( z, zSquared, digitalBiquadCoefficients ) );
         }
 
         return result;

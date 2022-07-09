@@ -32,10 +32,10 @@ package com.mhschmieder.acousticstoolkit;
 
 import java.text.NumberFormat;
 
+import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.util.MathUtils;
 
 import com.mhschmieder.commonstoolkit.text.NumberFormatUtilities;
-import com.mhschmieder.mathtoolkit.Complex;
 import com.mhschmieder.mathtoolkit.MathConstants;
 
 /**
