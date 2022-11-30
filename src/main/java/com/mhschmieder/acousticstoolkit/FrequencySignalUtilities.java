@@ -237,32 +237,47 @@ public final class FrequencySignalUtilities {
     // standard and not up for interpretation or product-specific assignments.
     @SuppressWarnings("nls")
     public static int getOctaveOffsetFrom10Hz( final String octaveRange ) {
+        int octaveOffset = 0;
+        
         switch ( octaveRange ) {
         case "10 Hz to 20 Hz":
-            return 0;
+            octaveOffset = 0;
+            break;
         case "20 Hz to 40 Hz":
-            return 1;
+            octaveOffset = 1;
+            break;
         case "40 Hz to 80 Hz":
-            return 2;
+            octaveOffset = 2;
+            break;
         case "80 Hz to 160 Hz":
-            return 3;
+            octaveOffset = 3;
+            break;
         case "160 Hz to 315 Hz":
-            return 4;
+            octaveOffset = 4;
+            break;
         case "315 Hz to 630 Hz":
-            return 5;
+            octaveOffset = 5;
+            break;
         case "630 Hz to 1.25 kHz":
-            return 6;
+            octaveOffset = 6;
+            break;
         case "1.25 kHz to 2.5 kHz":
-            return 7;
+            octaveOffset = 7;
+            break;
         case "2.5 kHz to 5 kHz":
-            return 8;
+            octaveOffset = 8;
+            break;
         case "5 kHz to 10 kHz":
-            return 9;
+            octaveOffset = 9;
+            break;
         case "10 kHz to 20 kHz":
-            return 10;
+            octaveOffset = 10;
+            break;
         default:
-            return 0;
+            break;
         }
+        
+        return octaveOffset;
     }
 
     @SuppressWarnings("nls")

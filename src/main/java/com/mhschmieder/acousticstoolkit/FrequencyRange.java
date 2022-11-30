@@ -44,34 +44,50 @@ public final class FrequencyRange {
     @SuppressWarnings("nls")
     public static double getNominalCenterFrequencyDefaultForOctaveRange( final String sOctaveRange,
                                                                          final boolean narrowBand ) {
+        double centerFrequencyDefault = 4000.0d;
+        
         switch ( sOctaveRange ) {
         case FrequencyRange.OCTAVE_RANGE_WIDE_DEFAULT:
-            return 4000d;
+            centerFrequencyDefault = 4000.0d;
+            break;
         case "10 Hz to 20 Hz":
-            return narrowBand ? 15.6 : 16d;
+            centerFrequencyDefault = narrowBand ? 15.6d : 16.0d;
+            break;
         case "20 Hz to 40 Hz":
-            return narrowBand ? 31.2 : 31.5d;
+            centerFrequencyDefault = narrowBand ? 31.2d : 31.5d;
+            break;
         case "40 Hz to 80 Hz":
-            return narrowBand ? 62.5 : 63d;
+            centerFrequencyDefault = narrowBand ? 62.5d : 63.0d;
+            break;
         case "80 Hz to 160 Hz":
-            return 125d;
+            centerFrequencyDefault = 125.0d;
+            break;
         case "160 Hz to 315 Hz":
-            return 250d;
+            centerFrequencyDefault = 250.0d;
+            break;
         case "315 Hz to 630 Hz":
-            return 500d;
+            centerFrequencyDefault = 500.0d;
+            break;
         case "630 Hz to 1.25 kHz":
-            return 1000d;
+            centerFrequencyDefault = 1000.0d;
+            break;
         case "1.25 kHz to 2.5 kHz":
-            return 2000d;
+            centerFrequencyDefault = 2000.0d;
+            break;
         case "2.5 kHz to 5 kHz":
-            return 4000d;
+            centerFrequencyDefault = 4000.0d;
+            break;
         case "5 kHz to 10 kHz":
-            return 8000d;
+            centerFrequencyDefault = 8000.0d;
+            break;
         case "10 kHz to 20 kHz":
-            return 16000d;
+            centerFrequencyDefault = 16000.0d;
+            break;
         default:
-            return 4000d;
+            break;
         }
+        
+        return centerFrequencyDefault;
     }
 
     // Determine the nominal default Octave Range based on Center Frequency.
@@ -120,34 +136,50 @@ public final class FrequencyRange {
         // NOTE: We have to special-case for the first and last Narrow Band
         // Octave Ranges, as they extend beyond the single Wide Band Octave
         // Range and thus should cue a "closest match" vs. a default.
+        boolean frequencyInRange = false;
+        
         switch ( sOctaveRange ) {
         case FrequencyRange.OCTAVE_RANGE_WIDE_DEFAULT:
-            return true;
+            frequencyInRange = true;
+            break;
         case "10 Hz to 20 Hz":
-            return centerFrequency < 19d;
+            frequencyInRange = centerFrequency < 19d;
+            break;
         case "20 Hz to 40 Hz":
-            return ( centerFrequency >= 19d ) && ( centerFrequency < 39d );
+            frequencyInRange = ( centerFrequency >= 19d ) && ( centerFrequency < 39d );
+            break;
         case "40 Hz to 80 Hz":
-            return ( centerFrequency >= 39d ) && ( centerFrequency < 78d );
+            frequencyInRange = ( centerFrequency >= 39d ) && ( centerFrequency < 78d );
+            break;
         case "80 Hz to 160 Hz":
-            return ( centerFrequency >= 78d ) && ( centerFrequency < 156d );
+            frequencyInRange = ( centerFrequency >= 78d ) && ( centerFrequency < 156d );
+            break;
         case "160 Hz to 315 Hz":
-            return ( centerFrequency >= 156d ) && ( centerFrequency < 312d );
+            frequencyInRange = ( centerFrequency >= 156d ) && ( centerFrequency < 312d );
+            break;
         case "315 Hz to 630 Hz":
-            return ( centerFrequency >= 312d ) && ( centerFrequency < 624d );
+            frequencyInRange = ( centerFrequency >= 312d ) && ( centerFrequency < 624d );
+            break;
         case "630 Hz to 1.25 kHz":
-            return ( centerFrequency >= 624d ) && ( centerFrequency < 1248d );
+            frequencyInRange = ( centerFrequency >= 624d ) && ( centerFrequency < 1248d );
+            break;
         case "1.25 kHz to 2.5 kHz":
-            return ( centerFrequency >= 1248d ) && ( centerFrequency < 2496d );
+            frequencyInRange = ( centerFrequency >= 1248d ) && ( centerFrequency < 2496d );
+            break;
         case "2.5 kHz to 5 kHz":
-            return ( centerFrequency >= 2496d ) && ( centerFrequency < 4992d );
+            frequencyInRange = ( centerFrequency >= 2496d ) && ( centerFrequency < 4992d );
+            break;
         case "5 kHz to 10 kHz":
-            return ( centerFrequency >= 4992d ) && ( centerFrequency < 9986d );
+            frequencyInRange = ( centerFrequency >= 4992d ) && ( centerFrequency < 9986d );
+            break;
         case "10 kHz to 20 kHz":
-            return centerFrequency >= 9986d;
+            frequencyInRange = centerFrequency >= 9986d;
+            break;
         default:
-            return false;
+            break;
         }
+        
+        return frequencyInRange;
     }
 
     private RelativeBandwidth relativeBandwidth;

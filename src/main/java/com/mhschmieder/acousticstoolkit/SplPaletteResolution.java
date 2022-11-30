@@ -57,55 +57,82 @@ public enum SplPaletteResolution {
 
     @SuppressWarnings("nls")
     public static SplPaletteResolution fromAbbreviatedString( final String splPaletteResolutionAbbreviatedString ) {
+        SplPaletteResolution splPaletteResolution = defaultValue();
+        
         switch ( splPaletteResolutionAbbreviatedString ) {
         case "256":
-            return RES_256;
+            splPaletteResolution = RES_256;
+            break;
         case "64":
-            return RES_64;
+            splPaletteResolution = RES_64;
+            break;
         case "1db":
-            return RES_1DB;
+            splPaletteResolution = RES_1DB;
+            break;
         case "2db":
-            return RES_2DB;
+            splPaletteResolution = RES_2DB;
+            break;
         case "3db":
-            return RES_3DB;
+            splPaletteResolution = RES_3DB;
+            break;
         default:
-            return defaultValue();
+            break;
         }
+        
+        return splPaletteResolution;
     }
 
     @SuppressWarnings("nls")
     public final String toAbbreviatedString() {
+        String abbreviatedString = "64";
+        
         switch ( this ) {
         case RES_256:
-            return "256";
+            abbreviatedString = "256";
+            break;
         case RES_64:
-            return "64";
+            abbreviatedString = "64";
+            break;
         case RES_1DB:
-            return "1db";
+            abbreviatedString = "1db";
+            break;
         case RES_2DB:
-            return "2db";
+            abbreviatedString = "2db";
+            break;
         case RES_3DB:
-            return "3db";
+            abbreviatedString = "3db";
+            break;
         default:
-            return "64";
+            break;
         }
+        
+        return abbreviatedString;
     }
 
     public final int getNumberOfPaletteColors( final int splRangeDb ) {
+        int numberOfPaletteColors = 64;
+        
         switch ( this ) {
         case RES_256:
-            return 256;
+            numberOfPaletteColors = 256;
+            break;
         case RES_64:
-            return 64;
+            numberOfPaletteColors = 64;
+            break;
         case RES_1DB:
-            return splRangeDb;
+            numberOfPaletteColors = splRangeDb;
+            break;
         case RES_2DB:
-            return ( int ) Math.ceil( MathConstants.ONE_HALF * splRangeDb );
+            numberOfPaletteColors = ( int ) Math.ceil( MathConstants.ONE_HALF * splRangeDb );
+            break;
         case RES_3DB:
-            return ( int ) Math.ceil( MathConstants.ONE_THIRD * splRangeDb );
+            numberOfPaletteColors = ( int ) Math.ceil( MathConstants.ONE_THIRD * splRangeDb );
+            break;
         default:
             return 64;
         }
+        
+        return numberOfPaletteColors;
     }
 
 }

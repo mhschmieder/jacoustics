@@ -68,22 +68,32 @@ public enum RelativeBandwidth {
      *         value
      */
     public static int toOctaveDivider( final RelativeBandwidth relativeBandwidth ) {
+        int octaveDivider = 3;
+        
         switch ( relativeBandwidth ) {
         case ONE_OCTAVE:
-            return 1;
+            octaveDivider = 1;
+            break;
         case THIRD_OCTAVE:
-            return 3;
+            octaveDivider = 3;
+            break;
         case SIXTH_OCTAVE:
-            return 6;
+            octaveDivider = 6;
+            break;
         case TWELTH_OCTAVE:
-            return 12;
+            octaveDivider = 12;
+            break;
         case TWENTYFOURTH_OCTAVE:
-            return 24;
+            octaveDivider = 24;
+            break;
         case FORTYEIGHTH_OCTAVE:
-            return 48;
+            octaveDivider = 48;
+            break;
         default:
-            return defaultValue().toOctaveDivider();
+            break;
         }
+        
+        return octaveDivider;
     }
 
     /**
@@ -97,22 +107,32 @@ public enum RelativeBandwidth {
      */
     @SuppressWarnings("nls")
     public static RelativeBandwidth fromPresentationString( final String relativeBandwidthPresentationString ) {
+        RelativeBandwidth relativeBandwidth = defaultValue();
+        
         switch ( relativeBandwidthPresentationString ) {
         case "1 octave":
-            return ONE_OCTAVE;
+            relativeBandwidth = ONE_OCTAVE;
+            break;
         case "1/3 octave":
-            return THIRD_OCTAVE;
+            relativeBandwidth = THIRD_OCTAVE;
+            break;
         case "1/6 octave":
-            return SIXTH_OCTAVE;
+            relativeBandwidth = SIXTH_OCTAVE;
+            break;
         case "1/12 octave":
-            return TWELTH_OCTAVE;
+            relativeBandwidth = TWELTH_OCTAVE;
+            break;
         case "1/24 octave":
-            return TWENTYFOURTH_OCTAVE;
+            relativeBandwidth = TWENTYFOURTH_OCTAVE;
+            break;
         case "1/48 octave":
-            return FORTYEIGHTH_OCTAVE;
+            relativeBandwidth = FORTYEIGHTH_OCTAVE;
+            break;
         default:
-            return defaultValue();
+            break;
         }
+        
+        return relativeBandwidth;
     }
 
     /**
@@ -152,22 +172,32 @@ public enum RelativeBandwidth {
      */
     @SuppressWarnings("nls")
     public static String toAbbreviatedString( final RelativeBandwidth relativeBandwidth ) {
+        String abbreviatedString = defaultValue().toAbbreviatedString();
+        
         switch ( relativeBandwidth ) {
         case ONE_OCTAVE:
-            return "1";
+            abbreviatedString = "1";
+            break;
         case THIRD_OCTAVE:
-            return "1/3";
+            abbreviatedString = "1/3";
+            break;
         case SIXTH_OCTAVE:
-            return "1/6";
+            abbreviatedString = "1/6";
+            break;
         case TWELTH_OCTAVE:
-            return "1/12";
+            abbreviatedString = "1/12";
+            break;
         case TWENTYFOURTH_OCTAVE:
-            return "1/24";
+            abbreviatedString = "1/24";
+            break;
         case FORTYEIGHTH_OCTAVE:
-            return "1/48";
+            abbreviatedString = "1/48";
+            break;
         default:
-            return defaultValue().toAbbreviatedString();
+            break;
         }
+        
+        return abbreviatedString;
     }
 
     /**
