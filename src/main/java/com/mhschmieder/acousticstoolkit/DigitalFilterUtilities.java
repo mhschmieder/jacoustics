@@ -31,6 +31,7 @@
 package com.mhschmieder.acousticstoolkit;
 
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.util.FastMath;
 
 import com.mhschmieder.mathtoolkit.MathConstants;
 
@@ -56,7 +57,7 @@ public class DigitalFilterUtilities {
                                                      final double samplingFrequencyHz ) {
         // Theta is the angle to the pole frequency, in the z-plane.
         final double poleAngleRadians = getPoleAngleRadians( poleFrequencyHz, samplingFrequencyHz );
-        final Complex z = new Complex( Math.cos( poleAngleRadians ), Math.sin( poleAngleRadians ) );
+        final Complex z = new Complex( FastMath.cos( poleAngleRadians ), FastMath.sin( poleAngleRadians ) );
         return z;
     }
 
@@ -71,8 +72,8 @@ public class DigitalFilterUtilities {
         // sections (including pre-warping). It includes all twenty four
         // coefficients (three paired coefficients per biquad section).
         final double eQOmega = w;
-        final double eQSin = Math.sin( eQOmega );
-        final double eQCos = Math.cos( eQOmega );
+        final double eQSin = FastMath.sin( eQOmega );
+        final double eQCos = FastMath.cos( eQOmega );
         final double oneMinusCos = 1.0d - eQCos;
         final double onePlusCos = 1.0d + eQCos;
 
@@ -114,7 +115,7 @@ public class DigitalFilterUtilities {
     // Get the filter slope dB to filter slope order mapping (relevant to
     // Butterworth-based filters; including Linkwitz-Riley filters).
     public static short getButterworthFilterSlopeOrder( final int butterworthFilterSlopeDb ) {
-        final short butterworthFilterSlopeOrder = ( short ) Math
+        final short butterworthFilterSlopeOrder = ( short ) FastMath
                 .floor( butterworthFilterSlopeDb / BUTTERWORTH_DB_TO_FILTER_ORDER_RATIO );
         return butterworthFilterSlopeOrder;
     }

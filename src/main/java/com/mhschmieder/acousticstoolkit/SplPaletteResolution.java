@@ -30,6 +30,8 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
+import org.apache.commons.math3.util.FastMath;
+
 import com.mhschmieder.mathtoolkit.MathConstants;
 
 /**
@@ -123,10 +125,10 @@ public enum SplPaletteResolution {
             numberOfPaletteColors = splRangeDb;
             break;
         case RES_2DB:
-            numberOfPaletteColors = ( int ) Math.ceil( MathConstants.ONE_HALF * splRangeDb );
+            numberOfPaletteColors = ( int ) FastMath.ceil( MathConstants.ONE_HALF * splRangeDb );
             break;
         case RES_3DB:
-            numberOfPaletteColors = ( int ) Math.ceil( MathConstants.ONE_THIRD * splRangeDb );
+            numberOfPaletteColors = ( int ) FastMath.ceil( MathConstants.ONE_THIRD * splRangeDb );
             break;
         default:
             return 64;

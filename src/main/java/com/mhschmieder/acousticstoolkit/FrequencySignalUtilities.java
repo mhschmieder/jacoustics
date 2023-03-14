@@ -226,7 +226,7 @@ public final class FrequencySignalUtilities {
     public static double getCenterFrequencyByBandNumber( final int bandNumber,
                                                          final double octaveDivider ) {
         final double octaveDividerRatio = octaveDivider / 3.0d;
-        final int bandNumberAt1kHz = ( int ) Math.round( octaveDividerRatio * 30.0d );
+        final int bandNumberAt1kHz = ( int ) FastMath.round( octaveDividerRatio * 30.0d );
         final int numberOfFractionalOctaveBandsFrom1kHz = bandNumber - bandNumberAt1kHz;
         final double centerFrequency = 1000.0d
                 * FastMath.pow( 2.0d, numberOfFractionalOctaveBandsFrom1kHz / octaveDivider );

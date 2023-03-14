@@ -30,6 +30,8 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
+import org.apache.commons.math3.util.FastMath;
+
 /**
  * General utilities for working with time signals. These are fairly common
  * requests that pop up in many fields, so it seems appropriate to provide them
@@ -52,7 +54,7 @@ public final class TimeSignalUtilities {
         // TODO: Determine whether we should use floor or ceil vs. round.
         // NOTE: Possibly we should use floor if time adjustment is negative
         // and ceil if time adjustment is positive?
-        final int timeSignalAdjustmentSamples = ( int ) Math
+        final int timeSignalAdjustmentSamples = ( int ) FastMath
                 .round( timeSignalAdjustmentMs * sampleRateKhz );
 
         // Move the Time Signal.
@@ -104,8 +106,8 @@ public final class TimeSignalUtilities {
         final int sampleIndexLast = amplitudeVector.length - 1;
         for ( int sampleIndex = 0; sampleIndex <= sampleIndexLast; sampleIndex++ ) {
             y = amplitudeVector[ sampleIndex ];
-            if ( Math.abs( y ) > maxAbsValue ) {
-                maxAbsValue = Math.abs( y );
+            if ( FastMath.abs( y ) > maxAbsValue ) {
+                maxAbsValue = FastMath.abs( y );
                 peakTimeIndex = sampleIndex;
             }
         }
