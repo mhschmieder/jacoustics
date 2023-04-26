@@ -33,6 +33,7 @@ package com.mhschmieder.acousticstoolkit;
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.util.FastMath;
 
+import com.mhschmieder.commonstoolkit.lang.NumberUtilities;
 import com.mhschmieder.mathtoolkit.MathConstants;
 
 /**
@@ -201,8 +202,8 @@ public class DigitalFilterUtilities {
 
     // Get the filter slope label to filter slope dB mapping (all filters).
     public static int getFilterSlopeDb( final String filterSlopeLabel ) {
-        final int filterSlopeDb = Integer
-                .parseInt( filterSlopeLabel.split( FILTER_SLOPE_UNITS )[ 0 ] );
+        final int filterSlopeDb = NumberUtilities
+                .parseInteger( filterSlopeLabel.split( FILTER_SLOPE_UNITS )[ 0 ] );
         return filterSlopeDb;
     }
 
