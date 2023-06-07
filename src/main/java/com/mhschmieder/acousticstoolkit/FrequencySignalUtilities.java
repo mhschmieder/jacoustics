@@ -34,7 +34,6 @@ import java.text.NumberFormat;
 
 import org.apache.commons.math3.complex.Complex;
 import org.apache.commons.math3.util.FastMath;
-import org.apache.commons.math3.util.MathUtils;
 
 import com.mhschmieder.commonstoolkit.text.NumberFormatUtilities;
 import com.mhschmieder.mathtoolkit.MathConstants;
@@ -137,12 +136,22 @@ public final class FrequencySignalUtilities {
         }
     }
 
-    // Unwrap a single frequency phase value to [-180, +180] range.
+    // Unwrap a single frequency phase value to the [-180, +180] range.
     public static double unwrapPhase( final double frequencyPhase ) {
-        return MathUtils.normalizeAngle( frequencyPhase, 0.0d );
+        double unwrappedFrequencyPhase = frequencyPhase;
+
+        while ( unwrappedFrequencyPhase < -180.0d ) {
+            unwrappedFrequencyPhase += 360.0d;
+        }
+
+        while ( unwrappedFrequencyPhase > 180.0d ) {
+            unwrappedFrequencyPhase -= 360.0d;
+        }
+
+        return unwrappedFrequencyPhase;
     }
 
-    // Unwrap a frequency phase vector to [-180 180] range.
+    // Unwrap a frequency phase vector to the [-180 180] range.
     public static void unwrapPhase( final double[] frequencyPhaseData, final int numberOfBins ) {
         for ( int binIndex = 0; binIndex < numberOfBins; binIndex++ ) {
             final double frequencyPhase = frequencyPhaseData[ binIndex ];
