@@ -37,6 +37,7 @@ import org.apache.commons.math3.util.FastMath;
 
 import com.mhschmieder.commonstoolkit.text.NumberFormatUtilities;
 import com.mhschmieder.mathtoolkit.MathConstants;
+import com.mhschmieder.mathtoolkit.MathUtilities;
 
 /**
  * General utilities for working with frequency signals in the analog domain.
@@ -138,17 +139,7 @@ public final class FrequencySignalUtilities {
 
     // Unwrap a single frequency phase value to the [-180, +180] range.
     public static double unwrapPhase( final double frequencyPhase ) {
-        double unwrappedFrequencyPhase = frequencyPhase;
-
-        while ( unwrappedFrequencyPhase < -180.0d ) {
-            unwrappedFrequencyPhase += 360.0d;
-        }
-
-        while ( unwrappedFrequencyPhase > 180.0d ) {
-            unwrappedFrequencyPhase -= 360.0d;
-        }
-
-        return unwrappedFrequencyPhase;
+        return MathUtilities.normalizeAngleDegrees( frequencyPhase, 0.0d );
     }
 
     // Unwrap a frequency phase vector to the [-180 180] range.
