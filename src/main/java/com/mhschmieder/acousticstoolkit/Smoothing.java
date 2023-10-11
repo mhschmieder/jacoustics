@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2020, 2022 Mark Schmieder
+ * Copyright (c) 2020, 2023 Mark Schmieder
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,11 +30,13 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
+import com.mhschmieder.commonstoolkit.lang.ListViewConverter;
+
 /**
  * Smoothing generally refers to operations over specific Frequency Band Q
  * Factors.
  */
-public enum Smoothing {
+public enum Smoothing implements ListViewConverter {
     NARROW_BAND, SIXTH_OCTAVE_BAND, THIRD_OCTAVE_BAND;
 
     public static final Smoothing defaultValue() {
@@ -133,4 +135,8 @@ public enum Smoothing {
         return toPresentationString( this );
     }
 
+    @Override 
+    public final String toListCellText() {
+        return toPresentationString();
+    }
 }
