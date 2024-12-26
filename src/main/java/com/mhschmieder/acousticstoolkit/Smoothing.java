@@ -30,15 +30,18 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
-import com.mhschmieder.commonstoolkit.lang.ListCellPresentable;
+import com.mhschmieder.commonstoolkit.lang.LabelAssignable;
 
 /**
  * Smoothing generally refers to operations over specific Frequency Band Q
  * Factors. This enumeration also provides convenience methods for conversion
  * to octave dividers, which are of course trivial to derive but having them
  * as API allows for clean "foreach" syntax when looping the enum values.
+ * <p>
+ * TODO: Fully implement the recommended coding pattern for working with the
+ *  new LabelAssignable generic interface and associated list preparation tools.
  */
-public enum Smoothing implements ListCellPresentable< Smoothing > {
+public enum Smoothing implements LabelAssignable< Smoothing > {
     NARROW_BAND, SIXTH_OCTAVE_BAND, THIRD_OCTAVE_BAND;
 
     public static final Smoothing defaultValue() {
@@ -138,12 +141,12 @@ public enum Smoothing implements ListCellPresentable< Smoothing > {
     }
 
     @Override 
-    public final String toListCellText() {
+    public final String label() {
         return toPresentationString();
     }
 
     @Override
-    public Smoothing fromListCellText( String text ) {
+    public Smoothing valueOfLabel( String text ) {
         return fromPresentationString( text );
     }
 }
