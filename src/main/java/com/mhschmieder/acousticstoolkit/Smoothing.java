@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2020, 2023 Mark Schmieder
+ * Copyright (c) 2020, 2025 Mark Schmieder
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,22 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the PhysicsToolkit Library
+ * This file is part of the AcousticsToolkit Library
  *
  * You should have received a copy of the MIT License along with the
- * PhysicsToolkit Library. If not, see <https://opensource.org/licenses/MIT>.
+ * AcousticsToolkit Library. If not, see <https://opensource.org/licenses/MIT>.
  *
- * Project: https://github.com/mhschmieder/physicstoolkit
+ * Project: https://github.com/mhschmieder/acousticstoolkit
  */
 package com.mhschmieder.acousticstoolkit;
 
-import com.mhschmieder.commonstoolkit.lang.ListViewConverter;
+import com.mhschmieder.commonstoolkit.lang.ListCellPresentable;
 
 /**
  * Smoothing generally refers to operations over specific Frequency Band Q
- * Factors.
+ * Factors. This enumeration also provides convenience methods for conversion
+ * to octave dividers, which are of course trivial to derive but having them
+ * as API allows for clean "foreach" syntax when looping the enum values.
  */
-public enum Smoothing implements ListViewConverter {
+public enum Smoothing implements ListCellPresentable< Smoothing > {
     NARROW_BAND, SIXTH_OCTAVE_BAND, THIRD_OCTAVE_BAND;
 
     public static final Smoothing defaultValue() {
@@ -138,5 +140,10 @@ public enum Smoothing implements ListViewConverter {
     @Override 
     public final String toListCellText() {
         return toPresentationString();
+    }
+
+    @Override
+    public Smoothing fromListCellText( String text ) {
+        return fromPresentationString( text );
     }
 }
