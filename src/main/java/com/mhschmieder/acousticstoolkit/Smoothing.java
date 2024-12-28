@@ -30,7 +30,7 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
-import com.mhschmieder.commonstoolkit.lang.LabelAssignable;
+import com.mhschmieder.commonstoolkit.lang.Labeled;
 
 /**
  * Smoothing generally refers to operations over specific Frequency Band Q
@@ -39,9 +39,9 @@ import com.mhschmieder.commonstoolkit.lang.LabelAssignable;
  * as API allows for clean "foreach" syntax when looping the enum values.
  * <p>
  * TODO: Fully implement the recommended coding pattern for working with the
- *  new LabelAssignable generic interface and associated list preparation tools.
+ *  new Labeled generic interface and associated list preparation tools.
  */
-public enum Smoothing implements LabelAssignable< Smoothing > {
+public enum Smoothing implements Labeled< Smoothing > {
     NARROW_BAND, SIXTH_OCTAVE_BAND, THIRD_OCTAVE_BAND;
 
     public static final Smoothing defaultValue() {
