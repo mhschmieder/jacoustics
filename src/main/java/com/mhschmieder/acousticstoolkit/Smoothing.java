@@ -30,6 +30,9 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
+import java.util.Objects;
+
+import com.mhschmieder.commonstoolkit.lang.EnumUtilities;
 import com.mhschmieder.commonstoolkit.lang.Labeled;
 
 /**
@@ -42,7 +45,26 @@ import com.mhschmieder.commonstoolkit.lang.Labeled;
  *  new Labeled generic interface and associated list preparation tools.
  */
 public enum Smoothing implements Labeled< Smoothing > {
-    NARROW_BAND, SIXTH_OCTAVE_BAND, THIRD_OCTAVE_BAND;
+    NARROW_BAND( "No Smoothing" ), 
+    SIXTH_OCTAVE_BAND( "1/6 Octave Smoothing" ), 
+    THIRD_OCTAVE_BAND( "1/3 Octave Smoothing" );
+    
+    private String label;
+    
+    Smoothing( final String pLabel ) {
+        label = pLabel;
+    }
+
+    @Override 
+    public final String label() {
+        return label;
+    }
+
+    @Override
+    public Smoothing valueOfLabel( final String text ) {
+        return ( Smoothing ) EnumUtilities.getLabeledEnumFromLabel( 
+            text, values() );
+    }
 
     public static final Smoothing defaultValue() {
         return NARROW_BAND;
@@ -138,15 +160,5 @@ public enum Smoothing implements Labeled< Smoothing > {
 
     public final String toPresentationString() {
         return toPresentationString( this );
-    }
-
-    @Override 
-    public final String label() {
-        return toPresentationString();
-    }
-
-    @Override
-    public Smoothing valueOfLabel( String text ) {
-        return fromPresentationString( text );
     }
 }
