@@ -30,8 +30,6 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
-import java.util.Objects;
-
 import com.mhschmieder.commonstoolkit.lang.EnumUtilities;
 import com.mhschmieder.commonstoolkit.lang.Labeled;
 
@@ -104,7 +102,8 @@ public enum Smoothing implements Labeled< Smoothing > {
             octaveDivider = 3;
             break;
         default:
-            final String errMessage = "Unexpected " + smoothing.getClass().getSimpleName() + " " //$NON-NLS-1$ //$NON-NLS-2$
+            final String errMessage = "Unexpected " 
+                    + smoothing.getClass().getSimpleName() + " "
                     + smoothing;
             throw new IllegalArgumentException( errMessage );
         }
@@ -112,53 +111,7 @@ public enum Smoothing implements Labeled< Smoothing > {
         return octaveDivider;
     }
 
-    public static final Smoothing fromPresentationString( final String smoothingPresentationString ) {
-        Smoothing smoothing = defaultValue();
-        
-        switch ( smoothingPresentationString ) {
-        case "No Smoothing": //$NON-NLS-1$
-            smoothing = NARROW_BAND;
-            break;
-        case "1/6 Octave Smoothing": //$NON-NLS-1$ :
-            smoothing = SIXTH_OCTAVE_BAND;
-            break;
-        case "1/3 Octave Smoothing": //$NON-NLS-1$
-            smoothing = THIRD_OCTAVE_BAND;
-            break;
-        default:
-            break;
-        }
-        
-        return smoothing;
-    }
-
-    public static final String toPresentationString( final Smoothing smoothing ) {
-        String presentationString = null;
-        
-        switch ( smoothing ) {
-        case NARROW_BAND:
-            presentationString = "No Smoothing"; //$NON-NLS-1$
-            break;
-        case SIXTH_OCTAVE_BAND:
-            presentationString = "1/6 Octave Smoothing"; //$NON-NLS-1$
-            break;
-        case THIRD_OCTAVE_BAND:
-            presentationString = "1/3 Octave Smoothing"; //$NON-NLS-1$
-            break;
-        default:
-            final String errMessage = "Unexpected " + smoothing.getClass().getSimpleName() + " " //$NON-NLS-1$ //$NON-NLS-2$
-                    + smoothing;
-            throw new IllegalArgumentException( errMessage );
-        }
-        
-        return presentationString;
-    }
-
     public final int toOctaveDivider() {
         return toOctaveDivider( this );
-    }
-
-    public final String toPresentationString() {
-        return toPresentationString( this );
     }
 }
