@@ -8,7 +8,7 @@
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>AcousticsToolkit</name>
+    <name>acousticstoolkit</name>
     <url>https://github.com/mhschmieder/acousticstoolkit </url>
     <description>Acoustics and audio engineering classes for Java.</description>
 
