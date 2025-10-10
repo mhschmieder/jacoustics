@@ -30,10 +30,9 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
-import org.apache.commons.math3.util.FastMath;
-
 import com.mhschmieder.mathtoolkit.MathConstants;
 import com.mhschmieder.mathtoolkit.MathUtilities;
+import org.apache.commons.math3.util.FastMath;
 
 public final class SmoothingUtilities extends Object {
 

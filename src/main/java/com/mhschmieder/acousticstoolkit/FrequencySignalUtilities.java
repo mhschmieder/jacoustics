@@ -30,14 +30,13 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
-import java.text.NumberFormat;
-
-import org.apache.commons.math3.complex.Complex;
-import org.apache.commons.math3.util.FastMath;
-
 import com.mhschmieder.commonstoolkit.text.NumberFormatUtilities;
 import com.mhschmieder.mathtoolkit.MathConstants;
 import com.mhschmieder.mathtoolkit.MathUtilities;
+import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.util.FastMath;
+
+import java.text.NumberFormat;
 
 /**
  * General utilities for working with frequency signals in the analog domain.

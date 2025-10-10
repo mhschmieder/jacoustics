@@ -1,7 +1,7 @@
-/**
+/*
  * MIT License
  *
- * Copyright (c) 2020, 2022 Mark Schmieder
+ * Copyright (c) 2020, 2025 Mark Schmieder
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,8 +34,8 @@ package com.mhschmieder.acousticstoolkit;
 // to presentation strings and lookup indices or to a direct lookup index.
 public final class FrequencyRange {
 
-    public static final String RELATIVE_BANDWIDTH_DEFAULT       = RelativeBandwidth.defaultValue()
-            .toPresentationString();
+    public static final String RELATIVE_BANDWIDTH_DEFAULT
+            = RelativeBandwidth.defaultValue().label();
     public static final String OCTAVE_RANGE_WIDE_DEFAULT        = "20 Hz To 20 kHz";              //$NON-NLS-1$
     public static final String OCTAVE_RANGE_NARROW_DEFAULT      = "80 Hz To 160 Hz";              //$NON-NLS-1$
     public static final String CENTER_FREQUENCY_DISPLAY_DEFAULT = "4 kHz";                        //$NON-NLS-1$

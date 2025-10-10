@@ -1,7 +1,7 @@
-/**
+/*
  * MIT License
  *
- * Copyright (c) 2020, 2022 Mark Schmieder
+ * Copyright (c) 2020, 2025 Mark Schmieder
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,6 +30,10 @@
  */
 package com.mhschmieder.acousticstoolkit;
 
+import com.mhschmieder.commonstoolkit.lang.Abbreviated;
+import com.mhschmieder.commonstoolkit.lang.EnumUtilities;
+import com.mhschmieder.commonstoolkit.lang.Labeled;
+
 /**
  * Relative Bandwidth is a coarser concept than "Q" and is more specific to
  * particular acoustic engineering contexts where one is often more focused on
@@ -46,11 +50,50 @@ package com.mhschmieder.acousticstoolkit;
  * also for audio signals related to marine mammals, environment, sonar, etc.
  *
  * TODO: Expand this to also cover Relative Bandwidths that are multiple
- * octaves? No need to expand in the other direction, as 1/48 octave is in
- * most cases a single frequency (depending on the octave range context).
+ *  octaves? No need to expand in the other direction, as 1/48 octave is in
+ *  most cases a single frequency (depending on the octave range context).
  */
-public enum RelativeBandwidth {
-    ONE_OCTAVE, THIRD_OCTAVE, SIXTH_OCTAVE, TWELTH_OCTAVE, TWENTYFOURTH_OCTAVE, FORTYEIGHTH_OCTAVE;
+public enum RelativeBandwidth implements Labeled< RelativeBandwidth >,
+        Abbreviated< RelativeBandwidth > {
+    ONE_OCTAVE( "1 octave", "1" ),
+    THIRD_OCTAVE( "1/3 octave", "1/3" ),
+    SIXTH_OCTAVE( "1/6 octave", "1/6" ),
+    TWELTH_OCTAVE( "1/12 octave", "1/12" ),
+    TWENTYFOURTH_OCTAVE( "1/24 octave", "1/24" ),
+    FORTYEIGHTH_OCTAVE( "1/48 octave", "1/48" );
+
+    private String label;
+    private String abbreviation;
+
+    RelativeBandwidth( final String pLabel,
+                       final String pAbbreviation ) {
+        label = pLabel;
+        abbreviation = pAbbreviation;
+    }
+
+    @Override
+    public final String label() {
+        return label;
+    }
+
+    @Override
+    public RelativeBandwidth valueOfLabel( final String text ) {
+        return ( RelativeBandwidth ) EnumUtilities.getLabeledEnumFromLabel(
+                text, values() );
+    }
+
+    @Override
+    public final String abbreviation() {
+        return abbreviation;
+    }
+
+    @Override
+    public RelativeBandwidth valueOfAbbreviation(
+            final String abbreviatedText ) {
+        return ( RelativeBandwidth ) EnumUtilities
+                .getAbbreviatedEnumFromAbbreviation(
+                        abbreviatedText, values() );
+    }
 
     public static RelativeBandwidth defaultValue() {
         return THIRD_OCTAVE;
@@ -97,110 +140,6 @@ public enum RelativeBandwidth {
     }
 
     /**
-     * Returns the Relative Bandwidth corresponding to a provided presentation
-     * value (string).
-     *
-     * @param relativeBandwidthPresentationString
-     *            The Relative Bandwidth presentation value to convert
-     * @return The Relative bandwidth corresponding to a provided presentation
-     *         value (string)
-     */
-    @SuppressWarnings("nls")
-    public static RelativeBandwidth fromPresentationString( final String relativeBandwidthPresentationString ) {
-        RelativeBandwidth relativeBandwidth = defaultValue();
-        
-        switch ( relativeBandwidthPresentationString ) {
-        case "1 octave":
-            relativeBandwidth = ONE_OCTAVE;
-            break;
-        case "1/3 octave":
-            relativeBandwidth = THIRD_OCTAVE;
-            break;
-        case "1/6 octave":
-            relativeBandwidth = SIXTH_OCTAVE;
-            break;
-        case "1/12 octave":
-            relativeBandwidth = TWELTH_OCTAVE;
-            break;
-        case "1/24 octave":
-            relativeBandwidth = TWENTYFOURTH_OCTAVE;
-            break;
-        case "1/48 octave":
-            relativeBandwidth = FORTYEIGHTH_OCTAVE;
-            break;
-        default:
-            break;
-        }
-        
-        return relativeBandwidth;
-    }
-
-    /**
-     * Returns a presentation value (string) for the Relative Bandwidth, whether
-     * for saving in a file or presenting on the screen in a GUI context.
-     *
-     * @param relativeBandwidth
-     *            The Relative Bandwidth to convert to a presentation value
-     * @return A presentation value (string) for the provided Relative Bandwidth
-     */
-    @SuppressWarnings("nls")
-    public static String toPresentationString( final RelativeBandwidth relativeBandwidth ) {
-        return toAbbreviatedString( relativeBandwidth ) + " octave";
-    }
-
-    /**
-     * Returns the Relative Bandwidth corresponding to a provided abbreviated
-     * value (string).
-     *
-     * @param relativeBandwidthAbbreviatedString
-     *            The Relative Bandwidth presentation value to convert
-     * @return The Relative bandwidth corresponding to a provided abbreviated
-     *         value (string)
-     */
-    @SuppressWarnings("nls")
-    public static RelativeBandwidth fromAbbreviatedString( final String relativeBandwidthAbbreviatedString ) {
-        return fromPresentationString( relativeBandwidthAbbreviatedString + " octave" );
-    }
-
-    /**
-     * Returns an abbreviated value (string) for the Relative Bandwidth, whether
-     * for saving in a file or presenting on the screen in a GUI context.
-     *
-     * @param relativeBandwidth
-     *            The Relative Bandwidth to convert to an abbreviated value
-     * @return An abbreviated value (string) for the provided Relative Bandwidth
-     */
-    @SuppressWarnings("nls")
-    public static String toAbbreviatedString( final RelativeBandwidth relativeBandwidth ) {
-        String abbreviatedString = defaultValue().toAbbreviatedString();
-        
-        switch ( relativeBandwidth ) {
-        case ONE_OCTAVE:
-            abbreviatedString = "1";
-            break;
-        case THIRD_OCTAVE:
-            abbreviatedString = "1/3";
-            break;
-        case SIXTH_OCTAVE:
-            abbreviatedString = "1/6";
-            break;
-        case TWELTH_OCTAVE:
-            abbreviatedString = "1/12";
-            break;
-        case TWENTYFOURTH_OCTAVE:
-            abbreviatedString = "1/24";
-            break;
-        case FORTYEIGHTH_OCTAVE:
-            abbreviatedString = "1/48";
-            break;
-        default:
-            break;
-        }
-        
-        return abbreviatedString;
-    }
-
-    /**
      * Returns the octave divider corresponding to the Relative Bandwidth,
      * which is always an integer and can be used as the denominator in various
      * acoustical calculations.
@@ -211,25 +150,4 @@ public enum RelativeBandwidth {
     public final int toOctaveDivider() {
         return toOctaveDivider( this );
     }
-
-    /**
-     * Returns a presentation value (string) for the Relative Bandwidth, whether
-     * for saving in a file or presenting on the screen in a GUI context.
-     *
-     * @return A presentation value (string) for this Relative Bandwidth
-     */
-    public final String toPresentationString() {
-        return toPresentationString( this );
-    }
-
-    /**
-     * Returns an abbreviated value (string) for the Relative Bandwidth, whether
-     * for saving in a file or presenting on the screen in a GUI context.
-     *
-     * @return An abbreviated value (string) for this Relative Bandwidth
-     */
-    public final String toAbbreviatedString() {
-        return toAbbreviatedString( this );
-    }
-
 }
