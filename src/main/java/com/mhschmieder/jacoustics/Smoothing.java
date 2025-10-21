@@ -21,17 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- * This file is part of the AcousticsToolkit Library
+ * This file is part of the JAcoustics Library
  *
  * You should have received a copy of the MIT License along with the
- * AcousticsToolkit Library. If not, see <https://opensource.org/licenses/MIT>.
+ * JAcoustics Library. If not, see <https://opensource.org/licenses/MIT>.
  *
- * Project: https://github.com/mhschmieder/acousticstoolkit
+ * Project: https://github.com/mhschmieder/jacoustics
  */
-package com.mhschmieder.acousticstoolkit;
+package com.mhschmieder.jacoustics;
 
-import com.mhschmieder.commonstoolkit.lang.EnumUtilities;
-import com.mhschmieder.commonstoolkit.lang.Labeled;
+import com.mhschmieder.jcommons.lang.EnumUtilities;
+import com.mhschmieder.jcommons.lang.Labeled;
 
 /**
  * Smoothing generally refers to operations over specific Frequency Band Q

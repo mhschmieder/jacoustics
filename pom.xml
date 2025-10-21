@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mhschmieder</groupId>
-    <artifactId>acousticstoolkit</artifactId>
+    <artifactId>jacoustics</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>AcousticsToolkit</name>
-    <url>https://github.com/mhschmieder/acousticstoolkit </url>
+    <name>jacoustics</name>
+    <url>https://github.com/mhschmieder/jacoustics </url>
     <description>Acoustics and audio engineering classes for Java.</description>
 
     <licenses>
@@ -21,9 +21,9 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/mhschmieder/acousticstoolkit </url>
-        <connection>scm:git:git://github.com/mhschmieder/acousticstoolkit.git</connection>
-        <developerConnection>scm:git:git@github.com:mhschmieder/acousticstoolkit.git</developerConnection>
+        <url>https://github.com/mhschmieder/jacoustics </url>
+        <connection>scm:git:git://github.com/mhschmieder/jacoustics.git</connection>
+        <developerConnection>scm:git:git@github.com:mhschmieder/jacoustics.git</developerConnection>
     </scm>
 
     <developers>
@@ -47,13 +47,13 @@
         </dependency>
         <dependency>
             <groupId>com.mhschmieder</groupId>
-            <artifactId>mathtoolkit</artifactId>
+            <artifactId>jmath</artifactId>
             <version>0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.mhschmieder</groupId>
-            <artifactId>commonstoolkit</artifactId>
+            <artifactId>jcommons</artifactId>
             <version>0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
