@@ -1,7 +1,7 @@
-/**
+/*
  * MIT License
  *
- * Copyright (c) 2020, 2022 Mark Schmieder
+ * Copyright (c) 2020, 2025, Mark Schmieder. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ import java.text.NumberFormat;
 /**
  * General utilities for working with frequency signals in the analog domain.
  * These are fairly common requests that pop up in many fields, so it seems
- * appropriate to provide them in a top-level commons library.
+ * appropriate to provide them in a top-level common library for acoustics.
  */
 public final class FrequencySignalUtilities {
 
@@ -186,9 +186,9 @@ public final class FrequencySignalUtilities {
     // Function to expand a potentially metric abbreviated frequency to its
     // complete specification, accounting for locale formatting, and with or
     // without a space between the number and the unit.
-    @SuppressWarnings("nls")
-    public static double expandMetricAbbreviatedFrequency( final String metricAbbreviatedFrequency,
-                                                           final NumberFormat numberParse ) {
+    public static double expandMetricAbbreviatedFrequency(
+            final String metricAbbreviatedFrequency,
+            final NumberFormat numberParse ) {
         // First note whether the string representation even includes units.
         final boolean hasUnits = metricAbbreviatedFrequency.contains( "Hz" );
 
@@ -212,9 +212,7 @@ public final class FrequencySignalUtilities {
         final double frequency = NumberFormatUtilities.parseDouble( numericString, numberParse );
 
         // Conditionally adjust the frequency to account for thousands.
-        final double frequencyAdjusted = isMetricAbbreviated ? frequency * 1000.0d : frequency;
-
-        return frequencyAdjusted;
+        return isMetricAbbreviated ? frequency * 1000.0d : frequency;
     }
 
     // Gets the center frequency from the band number by implementing the
@@ -222,19 +220,21 @@ public final class FrequencySignalUtilities {
     // is the band number (M is the band number for 1000 Hz), and O is the
     // octave divider, but for simplicity's sake we refactor both M and O to be
     // in terms of third octave values.
-    public static double getCenterFrequencyByBandNumber( final int bandNumber,
-                                                         final double octaveDivider ) {
+    public static double getCenterFrequencyByBandNumber(
+            final int bandNumber,
+            final double octaveDivider ) {
         final double octaveDividerRatio = octaveDivider / 3.0d;
-        final int bandNumberAt1kHz = ( int ) FastMath.round( octaveDividerRatio * 30.0d );
-        final int numberOfFractionalOctaveBandsFrom1kHz = bandNumber - bandNumberAt1kHz;
-        final double centerFrequency = 1000.0d
-                * FastMath.pow( 2.0d, numberOfFractionalOctaveBandsFrom1kHz / octaveDivider );
-        return centerFrequency;
+        final int bandNumberAt1kHz = ( int ) FastMath.round(
+                octaveDividerRatio * 30.0d );
+        final int numberOfFractionalOctaveBandsFrom1kHz
+                = bandNumber - bandNumberAt1kHz;
+        return 1000.0d * FastMath.pow(
+                2.0d,
+                numberOfFractionalOctaveBandsFrom1kHz / octaveDivider );
     }
 
     // TODO: Make an enumeration or indexed lookup of octave ranges, as they are
-    // standard and not up for interpretation or product-specific assignments.
-    @SuppressWarnings("nls")
+    //  standard and not up for interpretation or product-specific assignments.
     public static int getOctaveOffsetFrom10Hz( final String octaveRange ) {
         int octaveOffset = 0;
         
@@ -279,12 +279,12 @@ public final class FrequencySignalUtilities {
         return octaveOffset;
     }
 
-    @SuppressWarnings("nls")
-    public static String getFormattedFrequency( final double frequency,
-                                                final NumberFormat numberFormat ) {
+    public static String getFormattedFrequency(
+            final double frequency,
+            final NumberFormat numberFormat ) {
         String formattedFrequency = "";
 
-        if ( frequency < 1000d ) {
+        if ( frequency < 1000.0d ) {
             // Use up to one digit of precision, to cover normal spacing of low
             // to mid-range frequencies.
             numberFormat.setMinimumFractionDigits( 0 );
@@ -306,8 +306,8 @@ public final class FrequencySignalUtilities {
     // filter calculations, it isn't digital in nature, so belongs here amongst
     // the other analog domain (aka s-domain, or frequency domain) methods.
     // NOTE: Due to the irrelevance of sigma variance in most contexts, this is
-    // equivalent to returning the pure sinusoidal filter slope as a function of
-    // frequency.
+    //  equivalent to returning the pure sinusoidal filter slope as a function
+    //  of frequency.
     public static Complex convertFrequencyToSDomain( final double frequencyHz ) {
         // Get the angular frequency in radians based on the frequency in Hertz.
         final double angularFrequencyRadians = FrequencySignalUtilities
@@ -317,14 +317,12 @@ public final class FrequencySignalUtilities {
         // "f": slope = -J*2*PI*f (where J = sqrt(-1)), and return as the omega
         // term in "s" for Laplace (blank the unused sigma term), where "s" =
         // sigma + j*omega.
-        final Complex s = new Complex( 0.0d, angularFrequencyRadians );
-        return s;
+        return new Complex( 0.0d, angularFrequencyRadians );
     }
 
     // Get the angular frequency in radians based on the frequency in Hertz.
     public static double getAngularFrequencyRadians( final double frequencyHz ) {
-        final double angularFrequencyRadians = MathConstants.TWO_PI * frequencyHz;
-        return angularFrequencyRadians;
+        return MathConstants.TWO_PI * frequencyHz;
     }
 
     // Convert a bandwidth to a quality factor ratio (aka Q).
@@ -335,7 +333,47 @@ public final class FrequencySignalUtilities {
 
         // Combining the ratios should result in the correct Q Factor for any
         // arbitrary bandwidth.
-        final double q = referenceQFactor * OCTAVE_BANDWIDTH_TO_QUALITY_FACTOR_RATIO;
-        return q;
+        return referenceQFactor * OCTAVE_BANDWIDTH_TO_QUALITY_FACTOR_RATIO;
+    }
+
+    public static int[] getClampedFrequencyRangeIndices(
+            final double[] bins,
+            final boolean useLimitedFrequencyRange,
+            final double lowestFrequencyToDisplay,
+            final double highestFrequencyToDisplay ) {
+        final int numberOfBins = bins.length;
+
+        // Find the start and end indices for the valid sub-range of the bins.
+        // NOTE: If not limiting the natural frequency range of the bins, we
+        //  bypass the loops and use zero and array length minus one as the
+        //  start and stop indices. Alternatively, this method could be skipped,
+        // TODO: Recode this to use rounding instead?
+        int startFreqIndex = 0;
+        int stopFreqIndex = useLimitedFrequencyRange
+                ? startFreqIndex
+                : numberOfBins - 1;
+
+        int freqIndex = startFreqIndex;
+        if ( useLimitedFrequencyRange ) {
+            while ( freqIndex < numberOfBins ) {
+                if ( bins[ freqIndex ] >= lowestFrequencyToDisplay ) {
+                    startFreqIndex = freqIndex;
+                    break;
+                }
+                freqIndex++;
+            }
+            while ( freqIndex < numberOfBins ) {
+                if ( bins[ freqIndex ] >= highestFrequencyToDisplay ) {
+                    stopFreqIndex = freqIndex;
+                    break;
+                }
+                freqIndex++;
+            }
+        }
+
+        final int[] displayableFrequencyRangeIndices = new int[ 2 ];
+        displayableFrequencyRangeIndices[ 0 ] = startFreqIndex;
+        displayableFrequencyRangeIndices[ 1 ] = stopFreqIndex;
+        return displayableFrequencyRangeIndices;
     }
 }
